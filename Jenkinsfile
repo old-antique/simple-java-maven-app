@@ -1,19 +1,13 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                echo "1"
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                echo "2"
             }
             post {
                 always {
@@ -23,7 +17,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                echo "3"
             }
         }
     }
